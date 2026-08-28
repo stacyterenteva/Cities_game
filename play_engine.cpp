@@ -5,7 +5,7 @@
 #include "play_engine.h"
 #include "string_funcs.h"
 
-void found_answer(City user_city, City* cities)
+int found_answer(City user_city, City* cities)
 {
     assert(cities);
 
@@ -14,9 +14,10 @@ void found_answer(City user_city, City* cities)
         if (user_city.last_letter == cities[i].first_letter) {
             printf("%s\n", cities[i].city_name);
             cities[i] = City {.first_letter = '\0', .city_name = "\0", .last_letter = '\0'};
-            return ;
+            return 1;
         }
     }
+    return 0;
 }
 
 

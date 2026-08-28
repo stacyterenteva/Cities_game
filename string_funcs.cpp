@@ -54,6 +54,11 @@ int last_char_num(char* string)
     for (i = 0; string[i] != '\0'; i++) {
         ;
     }
-    return i - 1;
+    if (string[i - 1] != 'ü' && string[i - 2] != 'ú' && string[i - 3] != 'û' && string[i - 4] != 'é') {
+        return i - 1;
+    }
+    else {
+        return i - 2;
+    }
 }
 
