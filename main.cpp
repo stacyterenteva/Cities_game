@@ -1,7 +1,8 @@
-#define TX_COMPILED
 #include <TXLib.h>
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
+#include <windows.h>
+#include <assert.h>
 
 #include "string_funcs.h"
 #include "ui.h"
@@ -10,13 +11,15 @@
 
 int main()
 {
+    system("chcp 1251 > nul");
+
     greeting();
 
-    City cities[5] = {{.first_letter = 'М', .city_name = "Москва", .last_letter = 'а'},
-                       {.first_letter = 'А', .city_name = "Астрахань", .last_letter = 'н'},
-                       {.first_letter = 'Н', .city_name = "Новосибирск", .last_letter = 'к'},
-                       {.first_letter = 'К', .city_name = "Караганда", .last_letter = 'а'},
-                       {.first_letter = 'А', .city_name = "Афины", .last_letter = 'н'}};
+    City cities[5] = {{.first_letter = 'м', .city_name = "Москва", .last_letter = 'а'},
+                       {.first_letter = 'а', .city_name = "Астрахань", .last_letter = 'н'},
+                       {.first_letter = 'н', .city_name = "Новосибирск", .last_letter = 'к'},
+                       {.first_letter = 'к', .city_name = "Караганда", .last_letter = 'а'},
+                       {.first_letter = 'а', .city_name = "Афины", .last_letter = 'н'}};
 
     int mode = 0;
 
@@ -30,26 +33,23 @@ int main()
 
             First_player who_is_first = FIRST_PLAYER_USER;
 
-            if (who_is_first == FIRST_PLAYER_PROGRAM) {
-                slow_print("Итак, карты говорят, что начинаю я\n");
-                txSleep(LONG_SLEEP);
-                slow_print("И мой первый город: ");
-                txSleep(LONG_SLEEP);
-                int first_city = rand() % NUM_OF_CITIES;
-                printf("%s\n", cities[first_city].city_name);
+            char user_city_name[MAX_NUM_OF_CHARS] = {'\0'};
+            scanf("%s", user_city_name);
+
+            int num_of_used_cities = 0;
+
+            while (!is_strings_equal(user_city_name, "end") && num_of_used_cities != NUM_OF_CITIES) {
+
+                City user_city = {.first_letter = user_city_name[0], .city_name = user_city_name, .last_letter = user_city_name[last_char_num(user_city_name)]};
+
+                found_answer(user_city, cities);
+
+                num_of_used_cities++;
+
+                delete_city_from_memory(user_city.city_name, cities);
+
+                scanf("%s", user_city_name);
             }
-            else {
-                slow_print("Начинаете вы\n");
-                txSleep(LONG_SLEEP);
-                slow_print("Назовите город, с которого хотите начать игру\n");
-            }
-
-            char* user_city = {};
-            scanf("%s", user_city);
-
-            delete_city_from_memory(user_city, cities);
-
-
         }
             break;
         default:
