@@ -36,7 +36,6 @@ int main()
         cities[j].last_letter = cities[j].city_name[last_char_num(cities[j].city_name)];
     }
 
-    printf("%c %s %c\n", cities[0].first_letter, cities[0].city_name, cities[0].last_letter);
     //putchar(cities[36].city_name[0]);
     int mode = 0;
 
@@ -50,19 +49,17 @@ int main()
             begin_game();
 
             //First_player who_is_first = FIRST_PLAYER_USER;
-            char user_city_name[MAX_NUM_OF_CHARS] = {'\0'};
+            char user_city_name[100] = {};
             scanf("%100s", user_city_name);
             clean_buf();
 
-            char flag_of_end[3] = {'e', 'n', 'd'};
+            char flag_of_end[4] = {'e', 'n', 'd', '\0'};
             while (!is_strings_equal(user_city_name, flag_of_end)) {
                 City user_city = {};
 
-                copy_char_array(user_city.city_name, user_city_name);
+                copy_char_array(user_city_name, user_city.city_name);
                 user_city.first_letter = tolower(user_city.city_name[0]);
-                user_city.last_letter = user_city.city_name[last_char_num(user_city.city_name)];
-
-
+                user_city.last_letter = tolower(user_city.city_name[last_char_num(user_city.city_name)]);
 
                 if (!found_answer(user_city, cities)) {
                     slow_print("”пс, городов на эту букву € больше не знаю\n");
