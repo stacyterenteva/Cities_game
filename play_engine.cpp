@@ -13,7 +13,7 @@ int found_answer(City user_city, City* cities)
     for (i = 0; i < NUM_OF_CITIES; i++) {
         if (user_city.last_letter == cities[i].first_letter) {
             printf("%s\n", cities[i].city_name);
-            cities[i] = City {.first_letter = '\0', .city_name = "\0", .last_letter = '\0'};
+            cities[i] = City {.first_letter = '\0', .city_name = {}, .last_letter = '\0'};
             return 1;
         }
     }
@@ -22,16 +22,27 @@ int found_answer(City user_city, City* cities)
 
 
 
-void delete_city_from_memory(const char* user_city, City* cities)
+void delete_city_from_memory(char* user_city, City* cities)
 {
     assert(user_city);
     assert(cities);
 
     for (int i = 0; i < NUM_OF_CITIES; i++) {
         if (is_strings_equal(user_city, cities[i].city_name)) {
-            cities[i] = City {.first_letter = '\0', .city_name = "\0", .last_letter = '\0'};
+            cities[i] = City {.first_letter = '\0', .city_name = {}, .last_letter = '\0'};
             return ;
         }
     }
+}
+
+void get_city(FILE* cities_base, char* city_name)
+{
+    int ch = 0;
+    int i = 0;
+    while (i < MAX_NUM_OF_CHARS && (ch = fgetc(cities_base)) != ';') {
+        city_name[i] = ch;
+        i++;
+    }
+    fgetc(cities_base);
 }
 

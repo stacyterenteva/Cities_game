@@ -2,12 +2,11 @@
 #include <stdio.h>
 #include <windows.h>
 #include <assert.h>
+#include <ctype.h>
 
 #include "string_funcs.h"
 #include "ui.h"
-
 #include "constants.h"
-
 #include "play_engine.h"
 
 int main()
@@ -16,21 +15,29 @@ int main()
 
     greeting();
 
-    City cities[NUM_OF_CITIES] = {{.first_letter = 'м', .city_name = "Москва", .last_letter = 'а'},
-                       {.first_letter = 'а', .city_name = "Астрахань", .last_letter = 'н'},
-                       {.first_letter = 'н', .city_name = "Новосибирск", .last_letter = 'к'},
-                       {.first_letter = 'к', .city_name = "Караганда", .last_letter = 'а'},
-                       {.first_letter = 'а', .city_name = "Афины", .last_letter = 'н'},
-                       {.first_letter = 'в', .city_name = "Видное", .last_letter = 'е'},
-                       {.first_letter = 'в', .city_name = "Воронеж", .last_letter = 'ж'},
-                       {.first_letter = 'а', .city_name = "Архангельск", .last_letter = 'к'},
-                       {.first_letter = 'с', .city_name = "Санкт_Петербург", .last_letter = 'г'},
-                       {.first_letter = 'у', .city_name = "Ульяновск", .last_letter = 'к'},
-                       {.first_letter = 'с', .city_name = "Саратов", .last_letter = 'в'},
-                       {.first_letter = 'к', .city_name = "Кострома", .last_letter = 'а'},
-                       {.first_letter = 'к', .city_name = "Киров", .last_letter = 'в'},
-                       {.first_letter = 'к', .city_name = "Кёльн", .last_letter = 'н'}};
+    //TODO файл + разбиение в алфавитном порядке, чтобы быстрее искать город
+    //TODO массив с городами которые ввёл пользователь, и проверка не повторяется ли он
+    //TODO проверка того, не повторяет ли пользователь города которые говорили мы
+    //TODO проверка того говорит ли пользователь
 
+    FILE *cities_base = fopen("cities_base.csv", "r");
+
+    assert(cities_base);
+
+    City cities[NUM_OF_CITIES] = {};
+
+    //char program_city_name[100] = {};
+
+    for (int j = 0; j < NUM_OF_CITIES; j++) {
+        get_city(cities_base, cities[j].city_name);
+
+        cities[j].first_letter = tolower(cities[j].city_name[0]);
+
+        cities[j].last_letter = cities[j].city_name[last_char_num(cities[j].city_name)];
+    }
+
+    printf("%c %s %c\n", cities[0].first_letter, cities[0].city_name, cities[0].last_letter);
+    //putchar(cities[36].city_name[0]);
     int mode = 0;
 
     scanf("%d", &mode);
@@ -43,13 +50,20 @@ int main()
             begin_game();
 
             //First_player who_is_first = FIRST_PLAYER_USER;
-
             char user_city_name[MAX_NUM_OF_CHARS] = {'\0'};
-            scanf("%s", user_city_name);
+            scanf("%100s", user_city_name);
+            clean_buf();
 
-            while (!is_strings_equal(user_city_name, "end")) {
+            char flag_of_end[3] = {'e', 'n', 'd'};
+            while (!is_strings_equal(user_city_name, flag_of_end)) {
+                City user_city = {};
 
-                City user_city = {.first_letter = user_city_name[0], .city_name = user_city_name, .last_letter = user_city_name[last_char_num(user_city_name)]};
+                copy_char_array(user_city.city_name, user_city_name);
+                user_city.first_letter = tolower(user_city.city_name[0]);
+                user_city.last_letter = user_city.city_name[last_char_num(user_city.city_name)];
+
+
+
                 if (!found_answer(user_city, cities)) {
                     slow_print("Упс, городов на эту букву я больше не знаю\n");
                     Sleep(SHORT_SLEEP);

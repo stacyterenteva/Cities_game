@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <assert.h>
+#include <ctype.h>
 
 #include "string_funcs.h"
 #include "constants.h"
@@ -16,7 +17,7 @@ void slow_print(const char* string)
     }
 }
 
-int my_strlen(const char* string)
+int my_strlen(char* string)
 {
     assert(string);
 
@@ -27,7 +28,7 @@ int my_strlen(const char* string)
     return i;
 }
 
-bool is_strings_equal(const char* first_string, const char* second_string)
+bool is_strings_equal(char* first_string, char* second_string)
 {
     assert(first_string);
     assert(second_string);
@@ -59,6 +60,20 @@ int last_char_num(char* string)
     }
     else {
         return i - 2;
+    }
+}
+
+void clean_buf()
+{
+    while (getchar() != '\n') {
+        ;
+    }
+}
+
+void copy_char_array(char* old_string, char* new_string)
+{
+    for (int i = 0; i < my_strlen(old_string); i++) {
+        new_string[i] = old_string[i];
     }
 }
 
