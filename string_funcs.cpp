@@ -13,7 +13,7 @@ void slow_print(const char* string)
 
     for (int i = 0; string[i] != '\0'; i++) {
         putchar(string[i]);
-        Sleep(SLOW_PRINT_Sleep);
+        Sleep(SLOW_PRINT_SLEEP);
     }
 }
 
@@ -55,7 +55,7 @@ int last_char_num(const char* string)
     for (i = 0; string[i] != '\0'; i++) {
         ;
     }
-    if (string[i - 1] != 'ü' && string[i - 2] != 'ú' && string[i - 3] != 'û' && string[i - 4] != 'é') {
+    if (string[i - 1] != 'ü' && string[i - 1] != 'ú' && string[i - 1] != 'û' && string[i - 1] != 'é') {
         return i - 1;
     }
     else {
@@ -72,8 +72,23 @@ void clean_buf()
 
 void copy_char_array(const char* old_string, char* new_string)
 {
-    for (int i = 0; i < my_strlen(old_string); i++) {
+    for (int i = 0; i < my_strlen(old_string) + 1; i++) {
         new_string[i] = old_string[i];
     }
+}
+
+
+void my_getline(char* string, unsigned int max_len)
+{
+    assert(string);
+
+    unsigned int i = 0;
+    int c = getchar();
+    while (i < max_len && c != '\n') {
+        string[i] = (char)c;
+        i++;
+        c = getchar();
+    }
+    string[i] = '\0';
 }
 

@@ -5,6 +5,7 @@
 
 int my_strlen(const char* string);
 int last_char_num(const char* string);
+void my_getline(char* string, unsigned int max_len);
 
 void slow_print(const char string[]);
 void clean_buf();

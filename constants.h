@@ -9,13 +9,13 @@ struct City {
 
 #ifdef VERSION_DEBUG
 
-const int SLOW_PRINT_Sleep = 0;
+const int SLOW_PRINT_SLEEP = 0;
 const int SHORT_SLEEP = 0;
 const int LONG_SLEEP = 0;
 
 #else
 
-const int SLOW_PRINT_Sleep = 40;
+const int SLOW_PRINT_SLEEP = 40;
 const int SHORT_SLEEP = 300;
 const int LONG_SLEEP = 600;
 
