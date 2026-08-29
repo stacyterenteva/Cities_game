@@ -17,7 +17,7 @@ void slow_print(const char* string)
     }
 }
 
-int my_strlen(char* string)
+int my_strlen(const char* string)
 {
     assert(string);
 
@@ -28,7 +28,7 @@ int my_strlen(char* string)
     return i;
 }
 
-bool is_strings_equal(char* first_string, char* second_string)
+bool is_strings_equal(const char* first_string, const char* second_string)
 {
     assert(first_string);
     assert(second_string);
@@ -47,7 +47,7 @@ bool is_strings_equal(char* first_string, char* second_string)
     return equal_flag;
 }
 
-int last_char_num(char* string)
+int last_char_num(const char* string)
 {
     assert(string);
 
@@ -70,7 +70,7 @@ void clean_buf()
     }
 }
 
-void copy_char_array(char* old_string, char* new_string)
+void copy_char_array(const char* old_string, char* new_string)
 {
     for (int i = 0; i < my_strlen(old_string); i++) {
         new_string[i] = old_string[i];
