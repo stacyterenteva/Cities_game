@@ -49,10 +49,14 @@ int main()
         case MODES_GAME: {
             begin_game();
 
-            //First_player who_is_first = FIRST_PLAYER_USER
             char user_city_name[100] = {};
-            //scanf("%100s", user_city_name);
             my_getline(user_city_name, MAX_NUM_OF_CHARS);
+
+            //First_player who_is_first = FIRST_PLAYER_USER
+            while (!is_city_real(user_city_name, cities)) {
+                printf("Кажется такого города нет, введите другой\n");
+                my_getline(user_city_name, MAX_NUM_OF_CHARS);
+            }
 
             while (!is_strings_equal(user_city_name, "end")) {
                 City user_city = {};
@@ -71,7 +75,10 @@ int main()
 
                 delete_city_from_memory(user_city.city_name, cities);
 
-                my_getline(user_city_name, MAX_NUM_OF_CHARS);
+                while (!is_city_real(user_city_name, cities)) {
+                    printf("Кажется такого города нет, введите другой\n");
+                    my_getline(user_city_name, MAX_NUM_OF_CHARS);
+                }
             }
         }
          break;
