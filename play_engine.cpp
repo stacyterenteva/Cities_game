@@ -6,14 +6,14 @@
 #include "play_engine.h"
 #include "string_funcs.h"
 
-int found_answer(City user_city, City* cities)
+unsigned char found_answer(City user_city, City* cities)
 {
     assert(cities);
 
     int i = 0;
     for (i = 0; i < NUM_OF_CITIES; i++) {
         if (user_city.last_letter == cities[i].first_letter) {
-            int program_city_last_letter = cities[i].last_letter;
+            unsigned char program_city_last_letter = cities[i].last_letter;
             printf("%s\n", cities[i].city_name);
             cities[i] = City {.first_letter = '\0', .city_name = {}, .last_letter = '\0'};
             return program_city_last_letter;

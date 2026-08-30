@@ -15,6 +15,8 @@ int main()
 {
     system("chcp 1251 > nul");
 
+    // printf(
+
     greeting();
 
     FILE *cities_base = fopen("cities_base.csv", "r");
@@ -47,10 +49,12 @@ int main()
                 City user_city = {};
 
                 copy_char_array(user_city_name, user_city.city_name);
-                user_city.first_letter = (char) tolower(user_city.city_name[0]);
-                user_city.last_letter = (char) tolower(user_city.city_name[last_char_num(user_city.city_name)]);
+                user_city.first_letter = (unsigned char) tolower(user_city.city_name[0]);
+                user_city.last_letter = (unsigned char) tolower(user_city.city_name[last_char_num(user_city.city_name)]);
 
-                if (!found_answer(user_city, cities)) {
+                unsigned char last_char = found_answer(user_city, cities);
+
+                if (!last_char) {
                     slow_print("”пс, городов на эту букву € больше не знаю\n");
                     Sleep(SHORT_SLEEP);
 
@@ -61,6 +65,11 @@ int main()
                 delete_city_from_memory(user_city.city_name, cities);
 
                 get_user_city(user_city_name, cities);
+
+                while (last_char != (unsigned char) tolower(user_city_name[0])) {
+                    printf("¬аш город должен начинатьс€ с %c\n", last_char);
+                    get_user_city(user_city_name, cities);
+                }
             }
         }
          break;
