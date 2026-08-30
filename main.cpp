@@ -36,6 +36,12 @@ int main()
     scanf("%d", &mode);
     clean_buf();
 
+    while (mode != 1 && mode != 2) {
+        printf("Некорректный ввод, введите 1(правила) или 2(начать игру)\n");
+        scanf("%d", &mode);
+        clean_buf();
+    }
+
     switch (mode) {
         case MODES_ROOLS:
             tell_rools();
@@ -94,8 +100,3 @@ void get_user_city(char* user_city_name, City* cities)
         my_getline(user_city_name, MAX_NUM_OF_CHARS);
     }
 }
-
-
-
-
-

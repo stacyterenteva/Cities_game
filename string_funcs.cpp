@@ -58,11 +58,16 @@ int last_char_idx(const char* string)
     }
     const char last_sym = string[i - 1];
 
-    if (last_sym != 'ü' && last_sym != 'ú' && last_sym != 'û' && last_sym != 'é') {
+    if (last_sym != 'û' && last_sym != 'é' && last_sym != 'ü' && last_sym != 'ú') {
         return i - 1;
     }
     else {
-        return i - 2;
+        if (last_sym != 'û' && last_sym != 'é' && last_sym != 'ü' && last_sym != 'ú') {
+            return i - 2;
+        }
+        else {
+            return i - 3;
+        }
     }
 }
 

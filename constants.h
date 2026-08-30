@@ -23,7 +23,7 @@ const int LONG_SLEEP = 600;
 
 const int MAX_NUM_OF_CHARS = 100;
 
-const int NUM_OF_CITIES = 599;
+const int NUM_OF_CITIES = 600;
 
 enum Modes {MODES_ROOLS = 1, MODES_GAME};
 
