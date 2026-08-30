@@ -80,7 +80,7 @@ void get_user_city(char* user_city_name, City* cities)
 
     my_getline(user_city_name, MAX_NUM_OF_CHARS);
     while (!is_city_real(user_city_name, cities)) {
-        printf("Кажется такого города нет, введите другой\n");
+        printf("Ваш ввод не соответствует правила: возможно такого города нет, или кто-то из нас его уже использовал\n");
         my_getline(user_city_name, MAX_NUM_OF_CHARS);
     }
 }
