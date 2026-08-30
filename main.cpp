@@ -9,6 +9,8 @@
 #include "constants.h"
 #include "play_engine.h"
 
+void get_user_city(char* user_city_name, City* cities);
+
 int main()
 {
     system("chcp 1251 > nul");
@@ -34,23 +36,19 @@ int main()
     switch (mode) {
         case MODES_ROOLS:
             tell_rools();
-            [[fallthrough]];
+            [[fallthrough]]; //NOTE как это работает(оно не выдавало ошибку с t на конце, но и не работала)
         case MODES_GAME: {
             begin_game();
 
             char user_city_name[100] = {};
-            my_getline(user_city_name, MAX_NUM_OF_CHARS);
-            while (!is_city_real(user_city_name, cities)) {
-                printf("Кажется такого города нет, введите другой\n");
-                my_getline(user_city_name, MAX_NUM_OF_CHARS);
-            }
+            get_user_city(user_city_name, cities);
 
             while (!is_strings_equal(user_city_name, "end")) {
                 City user_city = {};
 
                 copy_char_array(user_city_name, user_city.city_name);
-                user_city.first_letter = tolower(user_city.city_name[0]);
-                user_city.last_letter = tolower(user_city.city_name[last_char_num(user_city.city_name)]);
+                user_city.first_letter = (char) tolower(user_city.city_name[0]);
+                user_city.last_letter = (char) tolower(user_city.city_name[last_char_num(user_city.city_name)]);
 
                 if (!found_answer(user_city, cities)) {
                     slow_print("Упс, городов на эту букву я больше не знаю\n");
@@ -62,11 +60,7 @@ int main()
 
                 delete_city_from_memory(user_city.city_name, cities);
 
-                my_getline(user_city_name, MAX_NUM_OF_CHARS);
-                while (!is_city_real(user_city_name, cities)) {
-                    printf("Кажется такого города нет, введите другой\n");
-                    my_getline(user_city_name, MAX_NUM_OF_CHARS);
-                }
+                get_user_city(user_city_name, cities);
             }
         }
          break;
@@ -77,6 +71,18 @@ int main()
             return 1;
     }
 
+}
+
+void get_user_city(char* user_city_name, City* cities)
+{
+    assert(user_city_name);
+    assert(cities);
+
+    my_getline(user_city_name, MAX_NUM_OF_CHARS);
+    while (!is_city_real(user_city_name, cities)) {
+        printf("Кажется такого города нет, введите другой\n");
+        my_getline(user_city_name, MAX_NUM_OF_CHARS);
+    }
 }
 
 

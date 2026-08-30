@@ -41,9 +41,9 @@ void get_city(FILE* cities_base, char* city_name)
 
     assert(city_name);
 
-    int ch = 0;
+    char ch = 0;
     int i = 0;
-    while (i < MAX_NUM_OF_CHARS && (ch = fgetc(cities_base)) != ';') {
+    while (i < MAX_NUM_OF_CHARS && (ch = (char) fgetc(cities_base)) != ';') {
         city_name[i] = ch;
         i++;
     }
@@ -55,8 +55,16 @@ bool is_city_real(char* user_city_name, City* cities)
     assert(user_city_name);
     assert(cities);
 
+    //char lower_user_city_name[my_strlen(user_city_name)] = {}; //NOTE тут нужна динамическая память?
+
+    char lower_user_city_name[MAX_NUM_OF_CHARS] = {};
+
+    string_to_lower(user_city_name, lower_user_city_name);
+
     for (int i = 0; i < NUM_OF_CITIES; i++) {
-        if (is_strings_equal(user_city_name, cities[i].city_name)) {
+        char lower_program_city_name[MAX_NUM_OF_CHARS] = {};
+        string_to_lower(cities[i].city_name, lower_program_city_name);
+        if (is_strings_equal(lower_user_city_name, lower_program_city_name)) {
             return 1;
         }
     }

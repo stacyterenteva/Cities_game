@@ -92,3 +92,14 @@ void my_getline(char* string, unsigned int max_len)
     string[i] = '\0';
 }
 
+void string_to_lower(char* old_string, char* new_string)
+{
+    assert(old_string);
+    assert(new_string);
+
+    for (int i = 0; old_string[i] != '\0'; i++) {
+        new_string[i] = (char) tolower(old_string[i]);
+    }
+}
+
+
