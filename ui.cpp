@@ -1,7 +1,7 @@
 #define YELLOW "\033[33m"
 #define RESET "\033[0m"
 
-// NOTE: unused TXLib?
+// NOTE: unused TXLib? //used
 #include <TXLib.h>
 #include <stdio.h>
 #include <windows.h>

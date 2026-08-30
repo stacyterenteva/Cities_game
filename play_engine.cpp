@@ -7,13 +7,13 @@
 #include "play_engine.h"
 #include "string_funcs.h"
 
-unsigned char found_answer(City user_city, City* cities)
+char found_answer(City user_city, City* cities)
 {
     assert(cities);
 
     for (int i = 0; i < NUM_OF_CITIES; i++) {
         if (user_city.last_letter == cities[i].first_letter) {
-            unsigned char program_city_last_letter = cities[i].last_letter;
+            char program_city_last_letter = cities[i].last_letter;
             char temp[MAX_NUM_OF_CHARS] = {};
             Sleep(SHORT_SLEEP);
             snprintf(temp, sizeof(temp), "%s\n", cities[i].city_name);

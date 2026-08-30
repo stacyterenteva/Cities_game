@@ -18,8 +18,6 @@ int main()
 {
     system("chcp 1251 > nul");
 
-    // printf(
-
     greeting();
 
     FILE *cities_base = fopen("cities_base.csv", "r");
@@ -31,7 +29,7 @@ int main()
 
         cities[j].first_letter = (char) tolower(cities[j].city_name[0]);
 
-        cities[j].last_letter = cities[j].city_name[last_char_num(cities[j].city_name)];
+        cities[j].last_letter = cities[j].city_name[last_char_idx(cities[j].city_name)];
     }
 
     int mode = 0;
@@ -45,18 +43,17 @@ int main()
         case MODES_GAME: {
             begin_game();
 
-            // TODO: magic numbers
-            char user_city_name[100] = {};
+            char user_city_name[MAX_NUM_OF_CHARS] = {};
             get_user_city(user_city_name, cities);
 
             while (!is_strings_equal(user_city_name, "end")) {
                 City user_city = {};
 
                 copy_char_array(user_city_name, user_city.city_name);
-                user_city.first_letter = (unsigned char) tolower(user_city.city_name[0]);
-                user_city.last_letter = (unsigned char) tolower(user_city.city_name[last_char_num(user_city.city_name)]);
+                user_city.first_letter = (char) tolower(user_city.city_name[0]);
+                user_city.last_letter = (char) tolower(user_city.city_name[last_char_idx(user_city.city_name)]);
 
-                unsigned char last_char = found_answer(user_city, cities);
+                char last_char = found_answer(user_city, cities);
 
                 if (!last_char) {
                     slow_print("”пс, городов на эту букву € больше не знаю\n");
@@ -70,7 +67,7 @@ int main()
 
                 get_user_city(user_city_name, cities);
 
-                while (last_char != (unsigned char) tolower(user_city_name[0])) {
+                while (last_char != (char) tolower(user_city_name[0])) {
                     printf("¬аш город должен начинатьс€ с буквы %c\n", toupper(last_char));
                     get_user_city(user_city_name, cities);
                 }

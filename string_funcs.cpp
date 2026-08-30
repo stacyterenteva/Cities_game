@@ -48,7 +48,7 @@ bool is_strings_equal(const char* first_string, const char* second_string)
 }
 
 // TODO: last_char_idx
-int last_char_num(const char* string)
+int last_char_idx(const char* string)
 {
     assert(string);
 
