@@ -15,19 +15,10 @@ int main()
 
     greeting();
 
-    //TODO файл + разбиение в алфавитном пор€дке, чтобы быстрее искать город
-    //TODO массив с городами которые ввЄл пользователь, и проверка не повтор€етс€ ли он
-    //TODO проверка того, не повтор€ет ли пользователь города которые говорили мы
-    //TODO проверка того говорит ли пользователь
-
     FILE *cities_base = fopen("cities_base.csv", "r");
-
     assert(cities_base);
 
     City cities[NUM_OF_CITIES] = {};
-
-    //char program_city_name[100] = {};
-
     for (int j = 0; j < NUM_OF_CITIES; j++) {
         get_city(cities_base, cities[j].city_name);
 
@@ -36,23 +27,19 @@ int main()
         cities[j].last_letter = cities[j].city_name[last_char_num(cities[j].city_name)];
     }
 
-    //putchar(cities[36].city_name[0]);
     int mode = 0;
-
     scanf("%d", &mode);
     clean_buf();
 
     switch (mode) {
         case MODES_ROOLS:
             tell_rools();
-            [[fallthrought]];
+            [[fallthrough]];
         case MODES_GAME: {
             begin_game();
 
             char user_city_name[100] = {};
             my_getline(user_city_name, MAX_NUM_OF_CHARS);
-
-            //First_player who_is_first = FIRST_PLAYER_USER
             while (!is_city_real(user_city_name, cities)) {
                 printf(" ажетс€ такого города нет, введите другой\n");
                 my_getline(user_city_name, MAX_NUM_OF_CHARS);
@@ -75,6 +62,7 @@ int main()
 
                 delete_city_from_memory(user_city.city_name, cities);
 
+                my_getline(user_city_name, MAX_NUM_OF_CHARS);
                 while (!is_city_real(user_city_name, cities)) {
                     printf(" ажетс€ такого города нет, введите другой\n");
                     my_getline(user_city_name, MAX_NUM_OF_CHARS);
