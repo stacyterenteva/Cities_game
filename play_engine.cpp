@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <windows.h>
 
 #include "constants.h"
 #include "play_engine.h"
@@ -10,15 +11,20 @@ unsigned char found_answer(City user_city, City* cities)
 {
     assert(cities);
 
-    int i = 0;
-    for (i = 0; i < NUM_OF_CITIES; i++) {
+    for (int i = 0; i < NUM_OF_CITIES; i++) {
         if (user_city.last_letter == cities[i].first_letter) {
             unsigned char program_city_last_letter = cities[i].last_letter;
-            printf("%s\n", cities[i].city_name);
+            char temp[MAX_NUM_OF_CHARS] = {};
+            Sleep(SHORT_SLEEP);
+            snprintf(temp, sizeof(temp), "%s\n", cities[i].city_name);
+            slow_print(temp);
+
+            Sleep(SHORT_SLEEP);
             cities[i] = City {.first_letter = '\0', .city_name = {}, .last_letter = '\0'};
             return program_city_last_letter;
         }
     }
+
     return 0;
 }
 

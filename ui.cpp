@@ -1,5 +1,10 @@
+#define YELLOW "\033[33m"
+#define RESET "\033[0m"
+
+// NOTE: unused TXLib?
 #include <TXLib.h>
 #include <stdio.h>
+#include <windows.h>
 
 #include "ui.h"
 #include "string_funcs.h"
@@ -7,7 +12,7 @@
 
 void greeting()
 {
-    slow_print("Добро пожаловать на страницу игры \"Города\"\n");
+    slow_print(YELLOW "Добро пожаловать на страницу игры \"Города\"\n");
     Sleep(SHORT_SLEEP);
     slow_print("Меню: Правила игры(1), начать игру(2)\n");
 }
@@ -41,6 +46,9 @@ void tell_rools()
 void begin_game()
 {
     slow_print("Отлично, давайте начнем игру\n");
+    Sleep(SHORT_SLEEP);
+
+    slow_print("Введите свой первый город\n");
     Sleep(SHORT_SLEEP);
 
     //slow_print("Для начала, я случайным образом выберу того, кто из нас начнёт игру\n");

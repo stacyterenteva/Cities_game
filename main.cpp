@@ -1,3 +1,6 @@
+#define YELLOW "\033[33m"
+#define RESET "\033[0m"
+
 #include <math.h>
 #include <stdio.h>
 #include <windows.h>
@@ -38,10 +41,11 @@ int main()
     switch (mode) {
         case MODES_ROOLS:
             tell_rools();
-            [[fallthrough]]; //NOTE как это работает(оно не выдавало ошибку с t на конце, но и не работала)
+            [[fallthrough]];
         case MODES_GAME: {
             begin_game();
 
+            // TODO: magic numbers
             char user_city_name[100] = {};
             get_user_city(user_city_name, cities);
 
@@ -67,7 +71,7 @@ int main()
                 get_user_city(user_city_name, cities);
 
                 while (last_char != (unsigned char) tolower(user_city_name[0])) {
-                    printf("Ваш город должен начинаться с %c\n", last_char);
+                    printf("Ваш город должен начинаться с буквы %c\n", toupper(last_char));
                     get_user_city(user_city_name, cities);
                 }
             }
@@ -89,7 +93,7 @@ void get_user_city(char* user_city_name, City* cities)
 
     my_getline(user_city_name, MAX_NUM_OF_CHARS);
     while (!is_city_real(user_city_name, cities)) {
-        printf("Ваш ввод не соответствует правила: возможно такого города нет, или кто-то из нас его уже использовал\n");
+        printf("Ваш ввод не соответствует правилам: возможно такого города нет, или кто-то из нас его уже использовал\n");
         my_getline(user_city_name, MAX_NUM_OF_CHARS);
     }
 }

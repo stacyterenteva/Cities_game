@@ -47,6 +47,7 @@ bool is_strings_equal(const char* first_string, const char* second_string)
     return equal_flag;
 }
 
+// TODO: last_char_idx
 int last_char_num(const char* string)
 {
     assert(string);
@@ -55,7 +56,9 @@ int last_char_num(const char* string)
     for (i = 0; string[i] != '\0'; i++) {
         ;
     }
-    if (string[i - 1] != 'ü' && string[i - 1] != 'ú' && string[i - 1] != 'û' && string[i - 1] != 'é') {
+    const char last_sym = string[i - 1];
+
+    if (last_sym != 'ü' && last_sym != 'ú' && last_sym != 'û' && last_sym != 'é') {
         return i - 1;
     }
     else {
@@ -72,6 +75,9 @@ void clean_buf()
 
 void copy_char_array(const char* old_string, char* new_string)
 {
+    assert(old_string);
+    assert(new_string);
+
     for (int i = 0; i < my_strlen(old_string) + 1; i++) {
         new_string[i] = old_string[i];
     }
