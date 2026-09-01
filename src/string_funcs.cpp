@@ -57,12 +57,13 @@ int last_char_idx(const char* string)
         ;
     }
     const char last_sym = string[i - 1];
+    const char pre_last_sym = string[i - 2];
 
     if (last_sym != 'û' && last_sym != 'é' && last_sym != 'ü' && last_sym != 'ú') {
         return i - 1;
     }
     else {
-        if (last_sym != 'û' && last_sym != 'é' && last_sym != 'ü' && last_sym != 'ú') {
+        if (pre_last_sym != 'û' && pre_last_sym != 'é' && pre_last_sym != 'ü' && pre_last_sym != 'ú') {
             return i - 2;
         }
         else {

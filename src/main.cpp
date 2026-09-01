@@ -20,7 +20,7 @@ int main()
 
     greeting();
 
-    FILE *cities_base = fopen("cities_base.csv", "r");
+    FILE *cities_base = fopen("C:\\C\\Cities_game\\data\\cities_base.csv", "r");
     assert(cities_base);
 
     City cities[NUM_OF_CITIES] = {};
@@ -37,7 +37,7 @@ int main()
     clean_buf();
 
     while (mode != 1 && mode != 2) {
-        printf("Некорректный ввод, введите 1(правила) или 2(начать игру)\n");
+        printf("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1(пїЅпїЅпїЅпїЅпїЅпїЅпїЅ) пїЅпїЅпїЅ 2(пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ)\n");
         scanf("%d", &mode);
         clean_buf();
     }
@@ -62,10 +62,10 @@ int main()
                 char last_char = found_answer(user_city, cities);
 
                 if (!last_char) {
-                    slow_print("Упс, городов на эту букву я больше не знаю\n");
+                    slow_print("пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ\n");
                     Sleep(SHORT_SLEEP);
 
-                    slow_print("Вы победили)) Поздравляю!\n");
+                    slow_print("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)) пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!\n");
                     break;
                 }
 
@@ -74,16 +74,14 @@ int main()
                 get_user_city(user_city_name, cities);
 
                 while (last_char != (char) tolower(user_city_name[0])) {
-                    printf("Ваш город должен начинаться с буквы %c\n", toupper(last_char));
+                    printf("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ %c\n", toupper(last_char));
                     get_user_city(user_city_name, cities);
                 }
             }
         }
-         break;
-
-            break;
+        break;
         default:
-            printf("ОШИБКА\n");
+            printf("пїЅпїЅпїЅпїЅпїЅпїЅ\n");
             return 1;
     }
 
@@ -96,7 +94,7 @@ void get_user_city(char* user_city_name, City* cities)
 
     my_getline(user_city_name, MAX_NUM_OF_CHARS);
     while (!is_city_real(user_city_name, cities)) {
-        printf("Ваш ввод не соответствует правилам: возможно такого города нет, или кто-то из нас его уже использовал\n");
+        printf("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\n");
         my_getline(user_city_name, MAX_NUM_OF_CHARS);
     }
 }
