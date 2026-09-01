@@ -16,7 +16,7 @@ void get_user_city(char* user_city_name, City* cities);
 
 int main()
 {
-    system("chcp 1251 > nul");
+    //system("chcp 1251 > nul");
 
     greeting();
 
@@ -37,7 +37,7 @@ int main()
     clean_buf();
 
     while (mode != 1 && mode != 2) {
-        printf("������������ ����, ������� 1(�������) ��� 2(������ ����)\n");
+        printf("Некорректный ввод, введите 1(правила) или 2(начать игру)\n");
         scanf("%d", &mode);
         clean_buf();
     }
@@ -62,10 +62,10 @@ int main()
                 char last_char = found_answer(user_city, cities);
 
                 if (!last_char) {
-                    slow_print("���, ������� �� ��� ����� � ������ �� ����\n");
+                    slow_print("Упс, городов на эту букву я больше не знаю\n");
                     Sleep(SHORT_SLEEP);
 
-                    slow_print("�� ��������)) ����������!\n");
+                    slow_print("Вы победили)) Поздравляю!\n");
                     break;
                 }
 
@@ -74,14 +74,14 @@ int main()
                 get_user_city(user_city_name, cities);
 
                 while (last_char != (char) tolower(user_city_name[0])) {
-                    printf("��� ����� ������ ���������� � ����� %c\n", toupper(last_char));
+                    printf("Ваш город должен начинаться с буквы %c\n", toupper(last_char));
                     get_user_city(user_city_name, cities);
                 }
             }
         }
         break;
         default:
-            printf("������\n");
+            printf("ОШИБКА\n");
             return 1;
     }
 

@@ -56,14 +56,15 @@ int last_char_idx(const char* string)
     for (i = 0; string[i] != '\0'; i++) {
         ;
     }
-    const char last_sym = string[i - 1];
-    const char pre_last_sym = string[i - 2];
+    const char* last_sym = {string[i - 1], '\0'};
+    const char* pre_last_sym = {string[i - 2], '\0'};
 
-    if (last_sym != 'û' && last_sym != 'é' && last_sym != 'ü' && last_sym != 'ú') {
+    // TODO: use strings
+    if (is_strings_equal(last_sym, "ÑŒ") && is_strings_equal(last_sym, "ÑŠ") && is_strings_equal(last_sym, "Ñ‹") && is_strings_equal(last_sym, "Ð¹")) {
         return i - 1;
     }
     else {
-        if (pre_last_sym != 'û' && pre_last_sym != 'é' && pre_last_sym != 'ü' && pre_last_sym != 'ú') {
+    if (is_strings_equal(pre_last_sym, "ÑŒ") && is_strings_equal(pre_last_sym, "ÑŠ") && is_strings_equal(pre_last_sym, "Ñ‹") && is_strings_equal(pre_last_sym, "Ð¹")) {
             return i - 2;
         }
         else {
